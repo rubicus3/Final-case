@@ -7,6 +7,7 @@ def A2B(F_Point, Electr_Points):
     SHs, Distance = F_Point
     Days = 0
     Results = []
+    Credits = 0
     while Distance > 0:
         Days += 1
         k_Growth = sin(degrees(-pi / 2 + pi * (Temp + 0.5 * Oxygen)))
@@ -19,8 +20,8 @@ def A2B(F_Point, Electr_Points):
         Velocity = 2 * (Reactor_Power / 80) * (200 / Mass)
         Elect_f_supp = sum(range(0, Temp))# E(T)
         Distance -= Velocity
-        Credits = Reactor_Power * 10 + Oxygen * 7
-        Results.append({f"{Days}": [Distance, Gen]})
+        Credits += Reactor_Power * 10 + Oxygen * 7
+        Results.append({f"{Days}": [Distance, Gen, Credits]})
     return Results
 
 
