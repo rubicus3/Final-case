@@ -11,43 +11,16 @@ Window.size = (1280, 720)
 
 
 
-
-class Table(MDDataTable):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-
-
 class Container(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-
-        # self.data_tables = MDDataTable(
-        #     pos_hint={"center_y": 0.5, "center_x": 0.5},
-        #     size_hint=(0.8, 0.6),
-        #     use_pagination=False,
-        #     column_data=[
-        #         ("No. 1"),
-        #         ("Оставшиеся ресурсы"),
-        #         ("Расходуемые ресурсы"),
-        #         ("Распределение мощности реактора"),
-        #         ("Характеристика автоклава"),
-        #         ("Популяция SH"),
-        #     ],
-        #     row_data=[
-        #         (''),
-        #         (''),
-        #         (''),
-        #         (''),
-        #         (''),
-        #     ],
-        # )
 
         self.data_tables = MDDataTable(
             pos_hint={"center_y": 0.5, "center_x": 0.5},
             size_hint=(0.9, 0.6),
             use_pagination=False,
             column_data=[
-                ("No.", dp(30)),
+                ("День/Точка", dp(30)),
                 ("Оставшиеся  ресурсы", dp(40)),
                 ("Расходумемые ресурсы", dp(40)),
                 ("Распределение мощности реактора", dp(40)),
@@ -59,6 +32,15 @@ class Container(BoxLayout):
         self.add_widget(self.data_tables)
         self.ids["label"].text = f"Количество дней: {4}"
 
+    def update_row(self, data=["1","1","1","1","1",]):
+        self.data_tables.update_row(
+            self.data_tables.row_data[1],  # old row data
+            data,  # new row data
+        )
+
+
+    def update_days(self):
+        pass
 
 class App(MDApp):
     def build(self):
