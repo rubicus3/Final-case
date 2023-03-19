@@ -9,7 +9,7 @@ F_Points = r.json()['message']
 # 1 fuel = 10 credits
 
 
-F_Points = [r[0]]
+F_Points = []
 Reactor_Power = 0  # 1 fuel = 1%
 Engine_Power = 0  # W = max 80%
 Electr_Power = 0
