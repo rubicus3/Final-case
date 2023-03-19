@@ -10,7 +10,7 @@ def A2B(F_Point):
     Amin = 100000000000
     for Temp in range(0, 31):
         for Oxygen in range(1, 61):
-            Results = []
+            Results = {}
             Days = 0
             Engine_Power = 80
             Reactor_Power = 85
@@ -26,7 +26,7 @@ def A2B(F_Point):
                 Distance -= Velocity
                 Credits = Reactor_Power * 10 + Oxygen * 7
 
-                Results.append({f"{Days}": [Distance, Gen, Credits]})
+                Results.update({f"{Days}": [Distance, Gen, Credits]})
             if Days < Amin and Days:
                 Amin = Days
                 Days_min = Results
@@ -39,10 +39,11 @@ def alaka():
     headers = {"X-Auth-Token": "2u3jct64"}
     r = requests.get('https://dt.miet.ru/ppo_it_final', headers=headers)
     F_Points = r.json()['message']
+    a = []
     for i in F_Points:
-        print(sorted([A2B((j['SH'], j['distance'])) for j in i['points']], key=lambda x: x[0])[0])
-
-
+        a.append(sorted([A2B((j['SH'], j['distance'])) for j in i['points']], key=lambda x: x[0])[0])
+    return a
+print(alaka())
 Reactor_Power = 0  # 1 fuel = 1%  W + E
 Engine_Power = 0  # W = max 80%
 Electr_Power = 0  # E
