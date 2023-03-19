@@ -9,7 +9,7 @@ def A2B(F_Point):
     for Temp in range(0, 31):
         for Oxygen in range(1, 61):
             Gen = 8
-            Results = {}
+            Results = []
             Days = 0
             Engine_Power = 80
             Reactor_Power = 85
@@ -25,7 +25,7 @@ def A2B(F_Point):
                 Distance -= Velocity
                 Credits = Reactor_Power * 10 + Oxygen * 7
 
-                Results.update({f"{Days}": [Distance, Gen, Credits, Oxygen, Temp]})
+                Results.append({f"{Days}": [Distance, Gen, Credits, Oxygen, Temp]})
             if Days < Amin and Days:
                 Amin = Days
                 Days_min = Results
