@@ -6,7 +6,11 @@ r = requests.get('https://dt.miet.ru/ppo_it_final', headers=headers)
 print(r.json()['message'])
 
 
+# 1 oxygen = 7 credits
+# 1 fuel = 10 credits
 
+
+F_Points = [r[0]]
 Reactor_Power = 0  # 1 fuel = 1%
 Engine_Power = 0  # W = max 80%
 Electr_Power = 0
@@ -19,17 +23,18 @@ Gen = 0  # G
 
 
 # Calculations
-k_Growth = sin(degrees(-pi / 2 + pi * (Temp + 0.5 * Oxygen)))
 Electr_Points = Electr_Power * Days * 11 #
-Gen += Gen * k_Growth # G
-if Gen < 8:
-    Gen = 0
-Mass = Mass_Const + Gen # M
-#Energy_Temp  # E(T)
 Elect_f_supp = sum(range(0, Temp))# E(T)
+Velocity = 2 * (Reactor_Power / 80) * (200 / Mass)
 
 
 
 #Flight
 for F_Point in F_Points:
-    s, c = F_Point
+    SHs, Distance = F_Point
+    while Distance > 0:
+        k_Growth = sin(degrees(-pi / 2 + pi * (Temp + 0.5 * Oxygen)))
+        Gen += Gen * k_Growth  # G
+        if Gen < 8:
+            Gen = 0
+    Mass = Mass_Const + Gen  # M
