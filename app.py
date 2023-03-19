@@ -1,14 +1,16 @@
+from typing import List
+
 from kivy import Config
 from kivy.core.window import Window
 from kivy.metrics import dp
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.app import MDApp
 from kivymd.uix.datatables import MDDataTable
-from kivymd.uix.label import MDLabel
+
+from schemas import Day
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 Window.size = (1280, 720)
-
 
 
 class Container(BoxLayout):
@@ -27,25 +29,31 @@ class Container(BoxLayout):
                 ("Характеристика автоклава", dp(40)),
                 ("Популяция SH", dp(40)),
             ],
-            row_data=[(f"{i + 1}", "1", "2", "3", "4", "5") for i in range(3)],
+            row_data=[(f"{i + 1}", "0", "0", "0", "0", "0") for i in range(1)],
         )
         self.add_widget(self.data_tables)
         self.ids["label"].text = f"Количество дней: {4}"
 
-    def update_row(self, data=["1","1","1","1","1",]):
-        self.data_tables.update_row(
-            self.data_tables.row_data[1],  # old row data
-            data,  # new row data
-        )
+    def fill_rows(self, data: List[Day]):
+        c = 0
+        for i in data:
+            c += 1
+            d = [str(i.day_num), str(f"Топливо {i.remain_fuel} / Кислород {i.remain_oxi}"),
+                 str(f"Топливо {i.spend_fuel} / Кислород {i.spend_fuel}"),
+                 f"{i.engine_percent} / {i.electr_percent}",
+                 str(i.autoclav_temp), str(i.sh)]
 
+            self.data_tables.update_row(
+                self.data_tables.row_data[c],  # old row data
+                data,  # new row data
+            )
 
-    def update_days(self):
-        pass
+    def get_task(self):
+        print('afsdf')
+
 
 class App(MDApp):
     def build(self):
-        self.theme_cls.primary_palette = "BlueGray"
-        self.theme_cls.accent_palette = "BlueGray"
         return Container()
 
 

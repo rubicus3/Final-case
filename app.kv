@@ -3,7 +3,24 @@
 <Container>:
     orientation: 'vertical'
 
-    MDLabel:
-        id: label
-        text: 'Text'
-        size_hint: 1, 0.2
+    BoxLayout:
+        size_hint_y: 0.1
+        orientation: "horizontal"
+        Label:
+            size_hint_x: 0.1
+
+
+        MDLabel:
+            id: label
+            text: 'Text'
+            size_hint_x: 0.22
+
+        MDRaisedButton:
+            text: "Получить задание"
+            md_bg_color: "red"
+            on_release: root.get_task()
+            
+        Label:
+            size_hint_x: 0.1
+    Label:
+        size_hint_y: 0.2
