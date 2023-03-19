@@ -7,6 +7,8 @@ from kivy.uix.boxlayout import BoxLayout
 from kivymd.app import MDApp
 from kivymd.uix.datatables import MDDataTable
 
+from api import f, g
+
 from schemas import Day
 
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
@@ -22,9 +24,9 @@ class Container(BoxLayout):
             pos_hint={"center_y": 0.5, "center_x": 0.5},
             size_hint=(0.9, 0.6),
             padding=10,
-            use_pagination=False,
+            use_pagination=True,
             column_data=[
-                ("День/Точка", dp(30)),
+                ("День", dp(30)),
                 ("Оставшиеся  ресурсы", dp(40)),
                 ("Расходумемые ресурсы", dp(40)),
                 ("Распределение мощности реактора", dp(40)),
@@ -44,8 +46,8 @@ class Container(BoxLayout):
         for i in data:
             c += 1
             d = (str(i.day_num), str(f"Топливо {i.remain_fuel} / Кислород {i.remain_oxi}"),
-                 str(f"Топливо {i.spend_fuel} / Кислород {i.spend_fuel}"),
-                 f"{i.engine_percent} / {i.electr_percent}",
+                 str(f"Топливо {i.spend_fuel} / Кислород {i.spend_oxi}"),
+                 f"{80} / {5}",
                  str(i.autoclav_temp), str(i.sh))
 
             if self.filled:
@@ -59,8 +61,10 @@ class Container(BoxLayout):
                 )
 
     def get_task(self):
-        data=[Day(),Day(),Day(),Day(),Day()]
-        days=0
+        data=f()
+
+        print(data)
+        days=g()
         self.fill_rows(data)
         self.update_days(days)
 
