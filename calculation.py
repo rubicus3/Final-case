@@ -1,4 +1,10 @@
 from math import *
+import requests
+
+headers = {"X-Auth-Token": "2u3jct64"}
+r = requests.get('https://dt.miet.ru/ppo_it_final', headers=headers)
+print(r.json()['message'])
+
 
 
 Reactor_Power = 0  # 1 fuel = 1%
@@ -9,6 +15,8 @@ Mass_Const = 192  # M without SH
 Oxygen = 0  # Oxi
 Temp = 0  # T e [0;30]°C
 Gen = 0  # G
+Elect_f_supp = sum(range(0, Temp))
+
 
 
 # Calculations
