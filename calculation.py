@@ -11,11 +11,15 @@ def A2B(F_Point, Electr_Points):
         Days += 1
         k_Growth = sin(degrees(-pi / 2 + pi * (Temp + 0.5 * Oxygen)))
         Gen += Gen * k_Growth  # G
+        if Gen < 8:
+            Gen = 0
+            break
         Mass = 192 + Gen  # M
         Electr_Points += Electr_Power * 11 #
         Velocity = 2 * (Reactor_Power / 80) * (200 / Mass)
         Elect_f_supp = sum(range(0, Temp))# E(T)
         Distance -= Velocity
+
         Results.append({f"{Days}": [Distance, Gen, ]})
     return Results
 
