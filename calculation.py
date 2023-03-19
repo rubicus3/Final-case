@@ -38,7 +38,7 @@ Reactor_Power = 85  # 1 fuel = 1%  W + E
 Engine_Power = 80  # W = max 80%
 Electr_Power = 5 # E
 Days = 0
-Oxygen = 0  # Oxi
+Oxygen = 60  # Oxi
 Temp = 10  # T e [0;30]°C
 Gen = 8  # G
 Electr_Points = 0
