@@ -19,8 +19,8 @@ def A2B(F_Point, Electr_Points):
         Velocity = 2 * (Reactor_Power / 80) * (200 / Mass)
         Elect_f_supp = sum(range(0, Temp))# E(T)
         Distance -= Velocity
-
-        Results.append({f"{Days}": [Distance, Gen, ]})
+        Credits = Reactor_Power * 10 + Oxygen * 7
+        Results.append({f"{Days}": [Distance, Gen]})
     return Results
 
 
@@ -33,9 +33,9 @@ F_Points = r.json()['message']
 
 
 F_Points = []
-Reactor_Power = 0  # 1 fuel = 1%
+Reactor_Power = 0  # 1 fuel = 1%  W + E
 Engine_Power = 0  # W = max 80%
-Electr_Power = 0
+Electr_Power = 0 # E
 Days = 0
 Oxygen = 0  # Oxi
 Temp = 0  # T e [0;30]°C
