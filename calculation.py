@@ -15,7 +15,6 @@ Mass_Const = 192  # M without SH
 Oxygen = 0  # Oxi
 Temp = 0  # T e [0;30]°C
 Gen = 0  # G
-Elect_f_supp = sum(range(0, Temp))
 
 
 
@@ -27,6 +26,9 @@ if Gen < 8:
     Gen = 0
 Mass = Mass_Const + Gen # M
 #Energy_Temp  # E(T)
+Elect_f_supp = sum(range(0, Temp))# E(T)
+
+
 
 #Flight
 for F_Point in F_Points:
