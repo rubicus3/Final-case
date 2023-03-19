@@ -27,3 +27,7 @@ if Gen < 8:
     Gen = 0
 Mass = Mass_Const + Gen # M
 #Energy_Temp  # E(T)
+
+#Flight
+for F_Point in F_Points:
+    s, c = F_Point
