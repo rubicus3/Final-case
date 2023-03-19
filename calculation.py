@@ -15,7 +15,7 @@ Mass_Const = 192  # M without SH
 Oxygen = 0  # Oxi
 Temp = 0  # T e [0;30]°C
 Gen = 0  # G
-Elect_f_supp = sum(range(0, Temp))
+Elect_f_supp = sum(range(0, Temp))# E(T)
 
 
 
