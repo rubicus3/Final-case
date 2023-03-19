@@ -3,8 +3,7 @@ import requests
 
 headers = {"X-Auth-Token": "2u3jct64"}
 r = requests.get('https://dt.miet.ru/ppo_it_final', headers=headers)
-print(r.json()['message'])
-
+F_Points = r.json()['message']
 
 # 1 oxygen = 7 credits
 # 1 fuel = 10 credits
