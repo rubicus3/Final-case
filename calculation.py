@@ -43,7 +43,9 @@ def alaka():
     for i in F_Points:
         a.append(sorted([A2B((j['SH'], j['distance'])) for j in i['points']], key=lambda x: x[0])[0])
     return a
-print(alaka())
+
+
+
 Reactor_Power = 0  # 1 fuel = 1%  W + E
 Engine_Power = 0  # W = max 80%
 Electr_Power = 0  # E
