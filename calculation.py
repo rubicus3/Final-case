@@ -18,22 +18,26 @@ Mass_Const = 192  # M without SH
 Oxygen = 0  # Oxi
 Temp = 0  # T e [0;30]°C
 Gen = 0  # G
+Electr_Points = 0
 
 
 
 # Calculations
-Electr_Points = Electr_Power * Days * 11 #
-Elect_f_supp = sum(range(0, Temp))# E(T)
-Velocity = 2 * (Reactor_Power / 80) * (200 / Mass)
 
 
 
 #Flight
 for F_Point in F_Points:
     SHs, Distance = F_Point
+    Days = 0
     while Distance > 0:
+        Days += 1
         k_Growth = sin(degrees(-pi / 2 + pi * (Temp + 0.5 * Oxygen)))
         Gen += Gen * k_Growth  # G
         if Gen < 8:
             Gen = 0
-    Mass = Mass_Const + Gen  # M
+        Mass = Mass_Const + Gen  # M
+        Electr_Points += Electr_Power * 11 #
+        Velocity = 2 * (Reactor_Power / 80) * (200 / Mass)
+        Elect_f_supp = sum(range(0, Temp))# E(T)
+        Distance -= Velocity
