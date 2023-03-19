@@ -2,27 +2,35 @@ from math import *
 import requests
 
 
-def A2B(F_Point, Electr_Points):
+def A2B(F_Point):
+    Days = 0
     Gen = 8
     SHs, Distance = F_Point
-    Days = 0
-    Results = []
-    Credits = 0
-    while Distance > 0:
-        Days += 1
-        k_Growth = sin(degrees(-pi / 2 + pi * (Temp + 0.5 * Oxygen)))
-        Gen += Gen * k_Growth  # G
-        if Gen < 8:
-            Gen = 0
-            break
-        Mass = 192 + Gen  # M
-        Electr_Points += Electr_Power * 11 #
-        Velocity = 2 * (Reactor_Power / 80) * (200 / Mass)
-        Elect_f_supp = sum(range(0, Temp))# E(T)
-        Distance -= Velocity
-        Credits += Reactor_Power * 10 + Oxygen * 7
-        Results.append({f"{Days}": [Distance, Gen, Credits]})
-    return Results
+    Days_min = []
+    Amin = 100000000000
+    for Temp in range(0, 31):
+        for Oxygen in range(1, 61):
+            Results = []
+            Days = 0
+            Engine_Power = 80
+            Reactor_Power = 85
+            while Distance > 0:
+                Days += 1
+                k_Growth = sin(degrees(-pi / 2 + pi * (Temp + 0.5 * Oxygen)))
+                Gen += Gen * k_Growth  # G
+                if Gen < 8:
+                    Gen = 0
+                    break
+                Mass = 192 + Gen  # M
+                Velocity = 2 * (Engine_Power / 80) * (200 / Mass)
+                Distance -= Velocity
+                Credits = Reactor_Power * 10 + Oxygen * 7
+
+                Results.append({f"{Days}": [Distance, Gen, Credits]})
+            if Days < Amin and Days != 0:
+                Amin = Days
+                Days_min = Results
+    return Amin, Days_min
 
 
 headers = {"X-Auth-Token": "2u3jct64"}
@@ -33,13 +41,13 @@ F_Points = r.json()['message']
 # 1 fuel = 10 credits
 
 
-F_Points = []
-Reactor_Power = 85  # 1 fuel = 1%  W + E
-Engine_Power = 80  # W = max 80%
-Electr_Power = 5 # E
+for i in F_Points:
+    print([A2B((j['SH'], j['distance'])) for j in i['points']])
+Reactor_Power = 0  # 1 fuel = 1%  W + E
+Engine_Power = 0  # W = max 80%
+Electr_Power = 0  # E
 Days = 0
-Oxygen = 60  # Oxi
-Temp = 10  # T e [0;30]°C
+Oxygen = 0  # Oxi
+Temp = 0  # T e [0;30]°C
 Gen = 8  # G
 Electr_Points = 0
-
